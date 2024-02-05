@@ -1,7 +1,7 @@
 const express = require('express');
 const { exec } = require('child_process');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 8080;
 
 app.use(express.json());
 
@@ -11,7 +11,7 @@ app.post('/api/search', (req, res) => {
     if (departureCity !== arrivalCity) {
         // Execute the Python script as a subprocess
         exec(
-            `python3 api_script.py ${departureCity} ${arrivalCity} ${departureDate} ${returnDate}`,
+            `python useap.py ${departureCity} ${arrivalCity} ${departureDate} ${returnDate}`,
             (error, stdout, stderr) => {
                 if (error) {
                     console.error(`Error: ${error.message}`);
@@ -28,5 +28,4 @@ app.post('/api/search', (req, res) => {
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
-});
 });
