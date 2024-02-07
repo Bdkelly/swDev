@@ -11,7 +11,7 @@ app.use(express.static('public'));
 
 app.use(bodyParser.json());
 
-app.post('/run_python_script', (req, res) => {
+app.post('/runpython', (req, res) => {
     const arguments = req.body.arguments || [];
 
     // Execute the Python script with provided arguments
