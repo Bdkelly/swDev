@@ -1,4 +1,3 @@
-const { parse } = require('querystring');
 
 function searchFlights() {
     const departureCity = document.getElementById('departureCity').value;
