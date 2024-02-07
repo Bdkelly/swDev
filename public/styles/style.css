@@ -3,6 +3,15 @@ body {
     font-family: Arial, sans-serif;
     margin: 20px;
 }
+.header {
+    display: flex;
+    background: #a22223;
+    color: white;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+}
 
 label {
     display: block;
@@ -24,3 +33,4 @@ button {
 #flightResults {
     margin-top: 20px;
 }
+
