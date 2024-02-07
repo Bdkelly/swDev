@@ -1,5 +1,7 @@
 const express = require('express');
-const { exec } = require('child_process');
+const bodyParser = require('body-parser');
+const { spawn } = require('child_process');
+
 const app = express();
 const port = process.env.PORT || 8080;
 
@@ -7,25 +9,18 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
 
-app.post('/api/search', (req, res) => {
-    const { departureCity, arrivalCity, departureDate, returnDate } = req.body;
+app.use(bodyParser.json());
 
-    if (departureCity !== arrivalCity) {
-        // Execute the Python script as a subprocess
-        exec(
-            `python useap.py ${departureCity} ${arrivalCity} ${departureDate} ${returnDate}`,
-            (error, stdout, stderr) => {
-                if (error) {
-                    console.error(`Error: ${error.message}`);
-                    res.status(500).json({ error: 'Internal Server Error' });
-                    return;
-                }
-                res.json(JSON.parse(stdout));
-            }
-        );
-    } else {
-        res.status(400).json({ error: 'Departure and arrival cities should be different' });
-    }
+app.post('/run_python_script', (req, res) => {
+    const arguments = req.body.arguments || [];
+
+    // Execute the Python script with provided arguments
+    const pythonProcess = spawn('python', ['flask_app/python_script.py', ...arguments]);
+    
+    pythonProcess.stdout.on('data', (data) => {
+        const output = JSON.parse(data.toString());
+        res.json({ output });
+    });
 });
 
 app.listen(port, () => {
