@@ -17,12 +17,13 @@ app.post('/run_python_script', (req, res) => {
     const depcity = arguments[0]; // Assuming the departure city is the first argument
   
     // Execute the Python script with provided arguments
-    const pythonProcess = spawn('python', ['flask_app/apiCall/other.py', depcity]);
+    const pythonProcess = spawn('python', ['flask_app/other.py', depcity]);
   
     pythonProcess.stdout.on('data', (data) => {
       const output = JSON.parse(data.toString());
       console.log(output); // Log the parsed JSON data
   
       // Send the data back to the client in the response
+      res.json(output);
     });
   });
