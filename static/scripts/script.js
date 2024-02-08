@@ -13,9 +13,10 @@ function runPythonScript() {
             var responseData = JSON.parse(xhr.responseText);
             console.log(responseData);
         }
-    } else {
-        console.error('Error running Python script:', xhr.statusText);
-      }
+        else {
+            console.error('Error running Python script:', xhr.statusText);
+          }
+    } 
     };
     xhr.send(JSON.stringify({ arguments }));
 }
