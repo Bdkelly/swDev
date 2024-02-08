@@ -2,7 +2,7 @@ function runpython() {
     const departureCity = document.getElementById('departureCity').value;
     const arrivalCity = document.getElementById('arrivalCity').value;
     // Arguments to pass to the Python script
-    var arguments = { departureCity, arrivalCity };
+    var requestData = { departureCity, arrivalCity };
 
         var xhr = new XMLHttpRequest();
         xhr.open('POST', '/run_python_script', true);
