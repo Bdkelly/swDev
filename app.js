@@ -27,3 +27,4 @@ app.post('/run_python_script', (req, res) => {
         // Exit code of the Python script
         console.log('Python script exited with code:', code);
     });
+});
