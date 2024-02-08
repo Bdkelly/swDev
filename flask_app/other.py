@@ -2,11 +2,11 @@ import sys
 import json
 import requests
 ##################
-def main():
+def main(dep):
     headers, url = login()
     end = "/flights/searchAirport"
     page = url + end
-    query = {"query":sys.argv[1]}
+    query = {"query":dep}
     resp = getstuff(headers,page,query)
     data = resp.json()
     return json.dumps(data) 
@@ -27,4 +27,5 @@ def login():
 ##########################
 if __name__ == "__main__":
     # Parse arguments
-    pass
+    dep = sys.argv[1]
+    print(main(dep))
