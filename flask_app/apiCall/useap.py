@@ -1,4 +1,4 @@
-from src.server.AppCall import AppCall
+from AppCall import AppCall
 import sys
 ###########################
 ###

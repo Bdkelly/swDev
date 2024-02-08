@@ -16,7 +16,7 @@ app.post('/run_python_script', (req, res) => {
     const arguments = req.body.arguments || [];
 
     // Execute the Python script with provided arguments
-    const pythonProcess = spawn('python', ['flask_app/python_script.py', ...arguments]);
+    const pythonProcess = spawn('python', ['flask_app/apiCall/tester.py', ...arguments]);
     
     pythonProcess.stdout.on('data', (data) => {
         const output = JSON.parse(data.toString());

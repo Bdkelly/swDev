@@ -1,6 +1,10 @@
 function runPythonScript() {
+    const departureCity = document.getElementById('departureCity').value;
+    const arrivalCity = document.getElementById('arrivalCity').value;
+    const departureDate = document.getElementById('departureDate').value;
+    const returnDate = document.getElementById('returnDate').value;
     // Arguments to pass to the Python script
-    var arguments = ['arg1', 'arg2', 'arg3'];
+    var arguments = [departureCity, arrivalCity];
 
     // Make an AJAX request to run the Python script
     var xhr = new XMLHttpRequest();
