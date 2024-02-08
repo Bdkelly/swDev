@@ -6,6 +6,7 @@ def main(depcity,arrcity):
     url = "https://sky-scrapper.p.rapidapi.com/api/v1"
     key = "d5a66d03bamsh50759c21ff62689p1884f5jsn80ade6452abe"
     host = "sky-scrapper.p.rapidapi.com"
+    
     caller = AppCall(url,key,host)
     return json.dumps(flightget(caller,depcity,arrcity))
 
