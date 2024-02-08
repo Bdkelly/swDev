@@ -1,8 +1,6 @@
 function runPythonScript() {
     const departureCity = document.getElementById('departureCity').value;
     const arrivalCity = document.getElementById('arrivalCity').value;
-    const departureDate = document.getElementById('departureDate').value;
-    const returnDate = document.getElementById('returnDate').value;
     // Arguments to pass to the Python script
     var arguments = [departureCity, arrivalCity];
 
