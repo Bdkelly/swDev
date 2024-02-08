@@ -2,7 +2,7 @@ function runPythonScript() {
     const departureCity = document.getElementById('departureCity').value;
     const arrivalCity = document.getElementById('arrivalCity').value;
     // Arguments to pass to the Python script
-    var arguments = [departureCity, arrivalCity];
+    var arguments = { departureCity };
 
     // Make an AJAX request to run the Python script
     var xhr = new XMLHttpRequest();
@@ -13,6 +13,9 @@ function runPythonScript() {
             var responseData = JSON.parse(xhr.responseText);
             console.log(responseData);
         }
+    } else {
+        console.error('Error running Python script:', xhr.statusText);
+      }
     };
-    xhr.send(JSON.stringify({ arguments: arguments }));
+    xhr.send(JSON.stringify({ arguments }));
 }
