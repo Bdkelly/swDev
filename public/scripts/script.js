@@ -17,7 +17,7 @@ function runpython(){
     var args = [departureCity,arrivalCity]
 
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/run_python_script', true);
+    xhr.open('POST', '/runpython', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
