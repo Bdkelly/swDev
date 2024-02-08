@@ -7,7 +7,7 @@ def main(depcity,arrcity):
     key = "d5a66d03bamsh50759c21ff62689p1884f5jsn80ade6452abe"
     host = "sky-scrapper.p.rapidapi.com"
     caller = AppCall(url,key,host)
-    return(flightget(caller,depcity,arrcity))
+    return json.dumps(flightget(caller,depcity,arrcity))
 
 def getapid(caller,location):
     out = caller.getaps(location)
@@ -16,12 +16,7 @@ def getapid(caller,location):
 def flightget(caller,fromap = "LOND",toap = "new"):
     fromapid = getapid(caller,fromap)
     #toapid = getapid(caller,toap)
-    return json.dumps(fromapid)
-
-def process_arguments(args):
-    # Your processing logic here
-    result = {'arguments': args}
-    return json.dumps(result)
+    return (fromapid)
 
 if __name__ == "__main__":
     # Parse arguments
