@@ -20,7 +20,7 @@ app.post('/run_python_script', (req, res) => {
     
     pythonProcess.stdout.on('data', (data) => {
         const output = JSON.parse(data.toString());
-        res.json({ output });
+        console.log(output);
     });
 });
 
