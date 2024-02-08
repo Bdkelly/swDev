@@ -1,15 +1,7 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const { spawn } = require('child_process');
-
 const app = express();
-//const port = process.env.PORT || 3000;
-
-// Serve static files
 app.use(express.static('static'));
-
-// Parse JSON bodies
-app.use(bodyParser.json());
 
 // Define route to run Python script
 app.post('/run_python_script', (req, res) => {
@@ -17,13 +9,21 @@ app.post('/run_python_script', (req, res) => {
     const depcity = arguments[0]; // Assuming the departure city is the first argument
   
     // Execute the Python script with provided arguments
-    const pythonProcess = spawn('python', ['flask_app/other.py', depcity]);
+    const pythonProcess = spawn('python', ['flask_app/apiCall/other.py', depcity]);
   
     pythonProcess.stdout.on('data', (data) => {
-      const output = JSON.parse(data.toString());
-      console.log(output); // Log the parsed JSON data
-  
-      // Send the data back to the client in the response
-      res.json(output);
+        // Data received from the Python script
+        console.log('Python script output:', data.toString());
     });
-  });
+    
+    // Listen for errors from the Python script
+    pythonProcess.stderr.on('data', (data) => {
+        // Error output from the Python script
+        console.error('Python script error:', data.toString());
+    });
+    
+    // Listen for Python script exit
+    pythonProcess.on('exit', (code) => {
+        // Exit code of the Python script
+        console.log('Python script exited with code:', code);
+    });
