@@ -2,16 +2,17 @@ import sys
 import json
 import requests
 ##################
-def main(depcity):
+def main():
     headers, url = login()
     end = "/flights/searchAirport"
     page = url + end
-    query = {"query":depcity}
-    return json.dumps(getstuff(headers,page,query))
+    query = {"query":sys.argv[1]}
+    resp = getstuff(headers,page,query)
+    data = resp.json()
+    return json.dumps(data) 
 ####################################
 def getstuff(headers,page,query):
-    response = requests.get(page, headers=headers,params=query)
-    return response
+    return requests.get(page, headers=headers,params=query)
 ############
 def login():
     url = "https://sky-scrapper.p.rapidapi.com/api/v1"
@@ -26,5 +27,4 @@ def login():
 ##########################
 if __name__ == "__main__":
     # Parse arguments
-    depcity = sys.argv[1]
-    print(main(depcity))
+    pass

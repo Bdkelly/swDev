@@ -24,6 +24,5 @@ app.post('/run_python_script', (req, res) => {
       console.log(output); // Log the parsed JSON data
   
       // Send the data back to the client in the response
-      res.json(output);
     });
   });
