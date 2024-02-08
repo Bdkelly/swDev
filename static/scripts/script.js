@@ -23,4 +23,5 @@ function runpython() {
       }
     };
   
-    xhr.send(JSON.stringify({ arguments }));
+    xhr.send(JSON.stringify({ arguments }))
+  };
