@@ -26,10 +26,18 @@
                 <option value="Rome">Rome</option>
                 <!-- Add more cities as needed -->
             </select>
-            <button onclick="runPythonScript()">Run Python Script</button>
+    
+            <label for="departureDate">Departure Date:</label>
+            <input type="date" id="departureDate" name="departureDate" required>
+    
+            <label for="returnDate">Return Date:</label>
+            <input type="date" id="returnDate" name="returnDate" required>
+    
+            <button type="button" onclick="runpython()">Search Flights</button>
         </form>
+    
         <div id="flightResults"></div>
-
+    
         <script src="scripts/script.js"></script>
-</body>
-</html>
+    </body>
+    </html>
