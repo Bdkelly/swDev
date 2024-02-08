@@ -4,7 +4,7 @@ import subprocess
 import json
 
 @app.route('/run_python_script', methods=['POST'])
-def runpython():
+def run_python_script():
     data = request.get_json()
     arguments = data.get('arguments', [])
     
