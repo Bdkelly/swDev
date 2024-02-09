@@ -1,4 +1,4 @@
-from AppCall import AppCall
+from flask_app.AppCall import AppCall
 import sys
 import json
 ##########################

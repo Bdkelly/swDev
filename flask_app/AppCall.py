@@ -30,23 +30,22 @@ class AppCall:
                         response = requests.get(page, headers=self.headers,params=query)
                         return self.datapull(response)
                     except:
-                        self.err("GetRequest - "+page)
+                        pass
                 ###
                 def noparams(page):
                     try:
                         response = requests.get(page, headers=self.headers)
                         return self.datapull(response)
                     except:
-                        self.err("GetRequest - "+page)
+                        pass
                 page = self.url + end
-                print("GET REQUEST: "+page)
                 if query == "":
                     return noparams(page)
                 else:
                     return withparams(page,query)
         ###
         def err(self,msg):
-                print("Error at: "+msg)
+                pass
         ###
         def datapull(self,resp):
             parsed = json.dumps(resp.json(), indent=4)
