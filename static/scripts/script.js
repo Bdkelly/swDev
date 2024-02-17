@@ -1,7 +1,8 @@
 function runpython() {
     const departureCity = document.getElementById('departureCity').value;
+    const arrivalCity = document.getElementById('arrivalCity').value;
     // Create a JSON object with arguments for the Python script
-    const arguments = { departureCity };
+    const arguments = { departureCity,arrivalCity };
   
     // Make an AJAX request to the Flask app endpoint
     const xhr = new XMLHttpRequest();

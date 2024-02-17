@@ -15,9 +15,10 @@ app.use(bodyParser.json());
 app.post('/run_python_script', (req, res) => {
     const data  = req.body.arguments;
     const depcity = data.departureCity;
+    const arrcity = data.arrivalCity
 
     // Execute the Python script with provided arguments
-    const pythonProcess = spawn('python', ['flask_app/other.py', depcity]);
+    const pythonProcess = spawn('python', ['flask_app/other.py', depcity,arrcity]);
     
     pythonProcess.stdout.on('data', (data) => {
         try {

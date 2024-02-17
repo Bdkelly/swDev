@@ -2,22 +2,29 @@ import sys
 import json
 import requests
 ##################
-def main(city):
+def main(fromcity,tocity):
+    cities = {"from":fromcity,"to":tocity}
+    out = {}
+    for kind,place in cities.items():
+        resp = runner(kind,place)
+        newstuff = resp.json()['data'][0]
+        out[kind] = newstuff
+    return json.dumps(out)
+######################spot
+def runner(place):
     headers, url = login()
     end = "/flights/searchAirport"
     page = url + end
-    query = {"query":city}
+    query = {"query":place}
     resp = getstuff(headers,page,query)
-    newstuff = resp.json()['data'][0]
-    return json.dumps(newstuff)
-####################################
+    return resp
+#################################
 def getstuff(headers,page,query):
     return requests.get(page, headers=headers,params=query)
-
-########################
+###################
 def datapull(resp):
-            parsed = json.dumps(resp.json(), indent=4)
-            return json.loads(parsed)
+    parsed = json.dumps(resp.json(), indent=4)
+    return json.loads(parsed)
 ############
 def login():
     url = "https://sky-scrapper.p.rapidapi.com/api/v1"
@@ -28,9 +35,9 @@ def login():
 	                "X-RapidAPI-Host": host
                 }
     return headers,url
-
 ##########################
 if __name__ == "__main__":
-    city = sys.argv[1]
+    fromcity = sys.argv[1]
+    tocity = sys.argv[2]
     # Parse arguments
-    print(main(city))
+    print(main(fromcity,tocity))
