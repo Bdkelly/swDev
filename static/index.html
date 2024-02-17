@@ -7,31 +7,63 @@
     <link rel="stylesheet" href="styles/style.css">
 </head>
     <body>
-        <h1>Flight Search</h1>
-    
+        <div class="header">
+            <div class="sep">
+                <h1>Flight Search App</h1>
+            </div>
+        </div>
+        <div class="sep">
         <form id="flightSearchForm">
-            <label for="departureCity">Departure City:</label>
+            <label class=sep for="departureCity">Departure City:</label>
             <select id="departureCity" name="departureCity">
                 <option value="New York">New York</option>
                 <option value="London">London</option>
                 <option value="Los Angeles">Los Angeles</option>
                 <option value="Rome">Rome</option>
+                <option value="Paris">Paris</option>
+                <option value="Tokyo">Tokyo</option>
+                <option value="Sydney">Sydney</option>
+                <option value="Berlin">Berlin</option>
+                <option value="Dubai">Dubai</option>
                 <!-- Add more cities as needed -->
             </select>
     
-            <label for="arrivalCity">Arrival City:</label>
+            <label class=sep for="arrivalCity">Arrival City:</label>
             <select id="arrivalCity" name="arrivalCity">
                 <option value="New York">New York</option>
                 <option value="London">London</option>
                 <option value="Los Angeles">Los Angeles</option>
                 <option value="Rome">Rome</option>
+                <option value="Paris">Paris</option>
+                <option value="Tokyo">Tokyo</option>
+                <option value="Sydney">Sydney</option>
+                <option value="Berlin">Berlin</option>
+                <option value="Dubai">Dubai</option>
                 <!-- Add more cities as needed -->
             </select>
 
-            <button type="button" onclick="runpython()">Search Flights</button>
+            <button type="button" onclick="runpython()">Start Search</button>
         </form>
-    
-        <div id="flightResults"></div>
+        </div>
+        <div id="apSelector">
+            <div class="part-bubble">Departure: 
+                <span id="departureCityResult">
+                    <select id="fromdrop"></select>
+                    <div class="part-bubble">Departure Date
+                        <input type="date" id="departureDate" name="departureDate">
+                    </div>
+                </span>
+            </div>
+            <div class="part-bubble">Arrival: 
+                <span id="arrivalCityResult">
+                    <select id="todrop"></select>
+                    <div class="part-bubble">Return Date
+                        <input type="date" id="returnDate" name="returnDate">
+                    </div>
+                </span>
+            </div>
+            <button type="button" onclick="getFlights()">Search Flights</button>
+        </div>
     
         <script src="scripts/script.js"></script>
     </body>

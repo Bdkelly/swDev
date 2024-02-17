@@ -12,6 +12,9 @@ body {
     align-items: center;
     padding: 8px;
 }
+.sep{
+    margin: 20px 15px 30px 15px;
+}
 
 label {
     display: block;
@@ -30,7 +33,41 @@ button {
     cursor: pointer;
 }
 
-#flightResults {
-    margin-top: 20px;
+/* Form Layout - Example with Flexbox */
+#flightSearchForm {
+    display: flex; 
+    justify-content: space-around; /* Distribute space around form items */
 }
 
+.form-group {
+    margin-bottom: 10px; /* Smaller margin */
+}
+
+/* Flight Results */
+#apSelector {
+   /* ... (Existing styles) ... */
+   display: flex; /* Arrange details horizontally */
+   flex-direction: column; /* Stack items if needed */
+}
+
+#apSelector > div { /* Direct children of flightResults */ 
+   margin-bottom: 5px;
+}
+
+.part-bubble {
+    background-color: #f0f0f0; /* Light background for the bubble */
+    border-radius: 10px;       /* Rounded corners */
+    padding: 12px 18px;        /* Internal spacing */
+    box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* For an arrow-like pointer (optional) */
+.part-bubble::after {
+    content: '';
+    position: absolute;
+    top: 50%;    /* Adjust as needed for vertical positioning */
+    left: -10px;  /* Position it outside the left edge */
+    transform: translateY(-50%); 
+    border: 10px solid transparent;
+    border-right-color: #f0f0f0; /* Matches bubble color */
+}

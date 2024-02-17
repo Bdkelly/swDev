@@ -6,9 +6,9 @@ def main(fromcity,tocity):
     cities = {"from":fromcity,"to":tocity}
     out = {}
     for kind,place in cities.items():
-        resp = runner(kind,place)
-        newstuff = resp.json()['data'][0]
-        out[kind] = newstuff
+        resp = runner(place)
+        row = datapull(resp)
+        out[kind] = row["data"][0]["entityId"]
     return json.dumps(out)
 ######################spot
 def runner(place):

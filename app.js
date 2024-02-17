@@ -18,19 +18,38 @@ app.post('/run_python_script', (req, res) => {
     const arrcity = data.arrivalCity
 
     // Execute the Python script with provided arguments
-    const pythonProcess = spawn('python', ['flask_app/other.py', depcity,arrcity]);
+    const pythonProcess = spawn('python', ['flask_app/real.py', depcity,arrcity]);
     
     pythonProcess.stdout.on('data', (data) => {
         try {
             const parsedData = JSON.parse(data.toString()); // Attempt to parse as JSON first
-            console.log(JSON.stringify(parsedData)); 
+            res.json(parsedData); 
         } catch (error) {
             // If it's not valid JSON, handle it differently (see method 2)
             console.log("Data is not in JSON format:", data.toString());  
         } 
     });
 });
-
+app.post('/flight_find', (req, res) => {
+    const data  = req.body.arguments;
+    const depcity = data.fromdata;
+    const arrcity = data.todata;
+    const depdate = data.departureDate;
+    const retdate = data.returnDate;
+    console.log(depcity)
+    // Execute the Python script with provided arguments
+    const pythonProcess = spawn('python', ['flask_app/flight_get.py', depcity,arrcity,depdate,retdate]);
+    
+    pythonProcess.stdout.on('data', (data) => {
+        try {
+            const parsedData = JSON.parse(data.toString()); // Attempt to parse as JSON first
+            res.json(parsedData); 
+        } catch (error) {
+            // If it's not valid JSON, handle it differently (see method 2)
+            console.log("Data is not in JSON format:", data.toString());  
+        } 
+    });
+});
 // Start the server
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
