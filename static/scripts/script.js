@@ -1,4 +1,5 @@
 let responseData;
+let flightData;
 
 function runpython() {
     console.log("Running")
@@ -39,6 +40,7 @@ function updateDropdown() {
   todrop.innerHTML = ""; 
 }
 function getFlights(){
+  console.log("Searching Flights")
   if (!responseData) {
     console.error("responseData is not available. Did you call runpython() first?");
     return; // Exit if no data 
@@ -50,11 +52,45 @@ function getFlights(){
   const todata = responseData.to[toapid]
   const departureDate = document.getElementById('departureDate').value;
   const returnDate = document.getElementById('returnDate').value;
-  console.log(todata,fromdata,departureDate,returnDate)
   const arguments = {fromdata,todata,departureDate,returnDate};
-  fetch('/flight_find', {
+  fetch('/flight_find',{
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ arguments: {fromdata,todata,departureDate,returnDate} })
+    body: JSON.stringify({ arguments: { fromdata,todata,departureDate,returnDate } })
 })
-}
+.then(response => response.json())
+.then(data => {
+  flightData = data;
+  const flightbox = document.getElementById('flight-box');
+  Object.entries(flightData).forEach(([flightKey, flightInfo]) => {
+    const flightDiv = document.createElement('div');
+    flightDiv.classList.add('flight-info');
+    flightDiv.classList.add('part-bubble');
+    //
+    const priceElement = document.createElement('p');
+    priceElement.textContent = `Price: ${flightInfo.Price}`;
+    const scoreElement = document.createElement('p');
+    scoreElement.textContent = `Score: ${flightInfo.Score}`;
+    const flightToElement = document.createElement('div');
+    for (const stopKey in flightInfo.flightTo) {
+      const stop = flightInfo.flightTo[stopKey];
+  
+      const stopElement = document.createElement('p');
+      stopElement.textContent = `From: ${stop.start} To: ${stop.end} 
+                                 (${stop.durationInMinutes} mins) by ${stop.carrier}`;
+      flightToElement.appendChild(stopElement);
+    }
+    //
+    flightDiv.appendChild(flightToElement); 
+    flightDiv.appendChild(priceElement);
+    flightDiv.appendChild(scoreElement);
+    flightbox.appendChild(flightDiv);
+      
+  });
+
+  }
+  )
+console.log("DONE")
+.catch(error => console.error('Error running Python script:', error));
+};
+

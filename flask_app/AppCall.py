@@ -22,6 +22,20 @@ class AppCall:
             query = {"query":location}
             return self.getrequest(end,query)
         ###    
+        def flightSearch(self,info):
+            end = "/flights/searchFlights"
+            query = {"originSkyId":info["depC"][0],
+                       "destinationSkyId":info["arrCity"][0],
+                       "originEntityId":info["depC"][1],
+                       "destinationEntityId":info["arrCity"][1],
+                       "date":info["depDate"],
+                       "returnDate":info["retDate"],
+                       "adults":"1",
+                       "currency":"USD",
+                       "market":"en-US",
+                       "countryCode":"US"}
+            return self.getrequest(end,query)
+        ###
         def getrequest(self,end,query = ""):
                 time.sleep(1)
                 ###

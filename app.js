@@ -32,11 +32,10 @@ app.post('/run_python_script', (req, res) => {
 });
 app.post('/flight_find', (req, res) => {
     const data  = req.body.arguments;
-    const depcity = data.fromdata;
-    const arrcity = data.todata;
+    const depcity = [data.fromdata.skyId,data.fromdata.entityId];
+    const arrcity = [data.todata.skyId,data.todata.entityId];
     const depdate = data.departureDate;
     const retdate = data.returnDate;
-    console.log(depcity)
     // Execute the Python script with provided arguments
     const pythonProcess = spawn('python', ['flask_app/flight_get.py', depcity,arrcity,depdate,retdate]);
     
