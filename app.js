@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 //
 app.post('/Alive',(req,res) => {
     const data  = req.body;
-    const pythonProcess = spawn('python', ['flask_app/usap.py']);
+    const pythonProcess = spawn('python', ['flask_app/useap.py']);
     pythonProcess.stdout.on('data',(data) => {
         const parsedData = JSON.parse(data.toString());
         res.json(parsedData);
