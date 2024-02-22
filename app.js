@@ -10,7 +10,15 @@ const port = process.env.PORT || 8080;
 
 // Parse JSON bodies
 app.use(bodyParser.json());
-
+//
+app.post('/Alive',(req,res) => {
+    const data  = req.body;
+    const pythonProcess = spawn('python', ['flask_app/usapp.py']);
+    pythonProcess.stdout.on('data',(data) => {
+        const parsedData = JSON.parse(data.toString());
+        res.json(parsedData);
+    }
+}
 // Define route to run Python script
 app.post('/run_python_script', (req, res) => {
     const data  = req.body.arguments;
