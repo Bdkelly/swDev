@@ -55,7 +55,7 @@ app.post('/Alive',(req,res) => {
     pythonProcess.stdout.on('data',(data) => {
         const parsedData = JSON.parse(data.toString());
         res.json(parsedData);
-    }
+    });
 });
 // Start the server
 app.listen(port, () => {
