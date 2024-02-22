@@ -3,6 +3,7 @@ let flightData;
 
 function runpython() {
     console.log("Running")
+    keepAlive()
     const departureCity = document.getElementById('departureCity').value;
     const arrivalCity = document.getElementById('arrivalCity').value;
     // Create a JSON object with arguments for the Python script
@@ -13,7 +14,6 @@ function runpython() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ arguments: { departureCity, arrivalCity } })
   })
-    keepAlive()
   .then(response => response.json())
   .then(data => {
       responseData = data;
