@@ -2,7 +2,7 @@ from AppCall import AppCall
 import json
 ###########################
 ###
-def main(city):
+def main():
     '''
     url = "https://sky-scrapper.p.rapidapi.com/api/v1"
     key = "d5a66d03bamsh50759c21ff62689p1884f5jsn80ade6452abe"
