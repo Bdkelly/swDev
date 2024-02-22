@@ -11,7 +11,6 @@ const port = process.env.PORT || 8080;
 // Parse JSON bodies
 app.use(bodyParser.json());
 //
-
 // Define route to run Python script
 app.post('/run_python_script', (req, res) => {
     const data  = req.body.arguments;
@@ -49,6 +48,14 @@ app.post('/flight_find', (req, res) => {
             console.log("Data is not in JSON format:", data.toString());  
         } 
     });
+});
+app.post('/Alive',(req,res) => {
+    const data  = req;
+    const pythonProcess = spawn('python', ['flask_app/useap.py']);
+    pythonProcess.stdout.on('data',(data) => {
+        const parsedData = JSON.parse(data.toString());
+        res.json(parsedData);
+    }
 });
 // Start the server
 app.listen(port, () => {
