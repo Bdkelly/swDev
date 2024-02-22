@@ -51,10 +51,13 @@ app.post('/flight_find', (req, res) => {
 });
 app.post('/Alive',(req,res) => {
     const data  = req;
+    console.log("Trying")
     const pythonProcess = spawn('python', ['flask_app/useap.py']);
+    console.log("Trying")
     pythonProcess.stdout.on('data',(data) => {
         const parsedData = JSON.parse(data.toString());
         res.json(parsedData);
+        console.log("Trying");
     });
 });
 // Start the server
