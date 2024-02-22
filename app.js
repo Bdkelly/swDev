@@ -12,7 +12,7 @@ const port = process.env.PORT || 8080;
 app.use(bodyParser.json());
 //
 app.post('/Alive',(req,res) => {
-    const data  = req.body;
+    const data  = req;
     const pythonProcess = spawn('python', ['flask_app/useap.py']);
     pythonProcess.stdout.on('data',(data) => {
         const parsedData = JSON.parse(data.toString());
