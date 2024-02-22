@@ -13,6 +13,7 @@ function runpython() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ arguments: { departureCity, arrivalCity } })
   })
+    keepAlive()
   .then(response => response.json())
   .then(data => {
       responseData = data;
@@ -93,4 +94,16 @@ function getFlights(){
 console.log("DONE")
 .catch(error => console.error('Error running Python script:', error));
 };
+function keepAlive(){
+    console.log("Trying")
+    fetch('/Alive',{
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ arguments: { fromdata,todata,departureDate,returnDate } })
+})
+    .then(response => response.json())
+      .then(data => {
+          console.log(data)
+      })
+}
 
