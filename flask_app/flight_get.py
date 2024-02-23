@@ -5,10 +5,12 @@ import requests
 
 def main(depcity,depDate,arrcity,retDate):
     vals = {}
+    count = 0
     caller = login()
     info = {"depC":depcity,"arrCity":arrcity,"depDate":depDate,"retDate":retDate}
     data = caller.flightSearch(info)
     for line in data['data']['itineraries']:
+        count =+ 1
         for k,v in line.items():
             if k == "legs":
                 org = v[0]['origin']['city']
@@ -22,7 +24,8 @@ def main(depcity,depDate,arrcity,retDate):
                     vals[line["id"]] = {"Price":line['price']['formatted'],"Score":line['score'],"flightTo":toLeg}
             else:
                 pass
-            
+        if count == 11:
+            break
     return json.dumps(vals)
 def getLegs(data,dest):
     legData = {}
