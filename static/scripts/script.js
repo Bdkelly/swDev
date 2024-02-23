@@ -91,18 +91,5 @@ function getFlights(){
 
   }
   )
-console.log("DONE")
 .catch(error => console.error('Error running Python script:', error));
 };
-function keepAlive(){
-    console.log("Trying")
-    fetch('/Alive',{
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' }
-})
-    .then(response => response.json())
-      .then(data => {
-          console.log(data)
-      })
-}
-
