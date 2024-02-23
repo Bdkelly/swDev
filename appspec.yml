@@ -1,14 +1,13 @@
 version: 0.0
 os: linux
 files:
-  - source: /
-    destination: /home/ec2-user
+  - source: /static/index.html
+    destination: /var/www/html/
 hooks:
   BeforeInstall:
     - location: startup/install_dependencies
       timeout: 300
       runas: root
-  ApplicationStart:
-    - location: //home/ec2-user/start_server.sh
+    - location: startup/start_server.sh
       timeout: 300
       runas: root
