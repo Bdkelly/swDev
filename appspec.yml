@@ -1,7 +1,7 @@
 version: 0.0
 os: linux
 files:
-  - source: /home/ec2-user
+  - source: /
     destination: /home/ec2-user
 hooks:
   BeforeInstall:
@@ -9,6 +9,6 @@ hooks:
       timeout: 300
       runas: root
   ApplicationStart:
-    - location: start_server.sh
+    - location: //home/ec2-user/start_server.sh
       timeout: 300
       runas: root
