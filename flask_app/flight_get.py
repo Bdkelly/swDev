@@ -31,10 +31,9 @@ def getLegs(data):
     totalTime = data["durationInMinutes"]
     for i in data['segments']:
         count += 1
-        off = i['origin']['parent']['name']
-        land = i['destination']['parent']['name']
+        off = i['origin']['name']
+        land = i['destination']['name']
         legData["Stop{0}".format(count)] = {"start":off,"end":land,"durationInMinutes":i["durationInMinutes"],"carrier":i["operatingCarrier"]['name']}
-        #print("{0} -> {1}".format(off,land))
     return legData,totalTime
 
 def login():
