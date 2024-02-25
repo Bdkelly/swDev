@@ -121,6 +121,7 @@ function getFlights(){
     console.error("responseData is not available. Did you call runpython() first?");
     return;
   }
+  clearFlights()
   const fromapid = fromdrop.value;
   const toapid = todrop.value;
   //Real Data
