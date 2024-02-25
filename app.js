@@ -6,7 +6,7 @@ const app = express();
 
 // Serve static files
 app.use(express.static('static'));
-const port = process.env.PORT || 80;
+const port = process.env.PORT || 8088;
 
 // Parse JSON bodies
 app.use(bodyParser.json());
