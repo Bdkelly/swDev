@@ -45,7 +45,7 @@ def login():
     return caller
 
 if __name__ == "__main__": 
-    
+  
     if sys.argv[4] == None:
         retDate = ""
     else:    
@@ -59,8 +59,7 @@ if __name__ == "__main__":
     arrcity = lst[1]
     depDate = lst[2]
     retDate = lst[3]
-    '''
-    
+    '''    
     print(main(depcity,depDate,arrcity,retDate))
 
 

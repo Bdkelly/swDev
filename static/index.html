@@ -8,7 +8,7 @@
 </head>
         <div class="header">
             <div class="sep">
-                <h1>Flight Search App</h1>
+                <h1 class="topper">Flight Search App</h1>
             </div>
         </div>
         <div class="topnav">
@@ -16,37 +16,38 @@
         </div>
         <div class="sep">
             <body style="background-color: lightblue;"></body>
-        <form id="flightSearchForm">
-            <label class=sep for="departureCity">Departure City:</label>
-            <select id="departureCity" name="departureCity">
-                <option value="New York">New York</option>
-                <option value="London">London</option>
-                <option value="Los Angeles">Los Angeles</option>
-                <option value="Rome">Rome</option>
-                <option value="Paris">Paris</option>
-                <option value="Tokyo">Tokyo</option>
-                <option value="Sydney">Sydney</option>
-                <option value="Berlin">Berlin</option>
-                <option value="Dubai">Dubai</option>
-                <!-- Add more cities as needed -->
-            </select>
+        </div>
+        <div class="part-bubble">
+            <form id="flightSearchForm">
+                <label class=sep for="departureCity">Departure City:</label>
+                <select id="departureCity" name="departureCity">
+                    <option value="New York">New York</option>
+                    <option value="London">London</option>
+                    <option value="Los Angeles">Los Angeles</option>
+                    <option value="Rome">Rome</option>
+                    <option value="Paris">Paris</option>
+                    <option value="Tokyo">Tokyo</option>
+                    <option value="Sydney">Sydney</option>
+                    <option value="Berlin">Berlin</option>
+                    <option value="Dubai">Dubai</option>
+                    <!-- Add more cities as needed -->
+                </select>
     
-            <label class=sep for="arrivalCity">Arrival City:</label>
-            <select id="arrivalCity" name="arrivalCity">
-                <option value="New York">New York</option>
-                <option value="London">London</option>
-                <option value="Los Angeles">Los Angeles</option>
-                <option value="Rome">Rome</option>
-                <option value="Paris">Paris</option>
-                <option value="Tokyo">Tokyo</option>
-                <option value="Sydney">Sydney</option>
-                <option value="Berlin">Berlin</option>
-                <option value="Dubai">Dubai</option>
-                <!-- Add more cities as needed -->
-            </select>
-
+                <label class=sep for="arrivalCity">Arrival City:</label>
+                <select id="arrivalCity" name="arrivalCity">
+                    <option value="New York">New York</option>
+                    <option value="London">London</option>
+                    <option value="Los Angeles">Los Angeles</option>
+                    <option value="Rome">Rome</option>
+                    <option value="Paris">Paris</option>
+                    <option value="Tokyo">Tokyo</option>
+                    <option value="Sydney">Sydney</option>
+                    <option value="Berlin">Berlin</option>
+                    <option value="Dubai">Dubai</option>
+                    <!-- Add more cities as needed -->
+                </select>
             <button type="button" onclick="runpython()">Start Search</button>
-        </form>
+            </form>
         </div>
         <div id="apSelector">
             <div class="part-bubble">Departure: 
@@ -65,17 +66,17 @@
                     </div>
                 </span>
             </div>
+            <div class="topnavdown">
             <div class="button-block">
                 <button type="button" onclick="getFlights()">Search Flights</button>
                 <button type="button" onclick="clearFlights()">Clear Flights</button>
-                <button type="button" onclick="saveFlights()">Save Flights</button>
+                <button type="button" id="saver" onclick="saveFlights()">Save Flights</button>
+                
+            </div>
             </div>
             
         </div>
-        <div id="flight-box">
-        
-        </div>
+        <div id="flight-box"></div>
     
         <script src="scripts/script.js"></script>
-    </body>
     </html>

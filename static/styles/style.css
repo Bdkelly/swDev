@@ -13,6 +13,7 @@ body {
     padding: 8px;
 }
 .sep{
+    text-align: center;
     margin: 20px 15px 30px 15px;
 }
 
@@ -69,6 +70,12 @@ button {
     width: 33%;
     font-family: 'PT Sans Caption', sans-serif;
   }
+  .topnavdown {
+    display: flex;
+    background-color: lightblue;
+    overflow: hidden;
+    justify-content: space-around;
+  }
   .homeButton, .aboutButton, .docButton {
     border: solid #ffac37;
   }
@@ -79,6 +86,7 @@ button {
   
 
 .part-bubble {
+    flex-flow: row wrap;
     margin: 15px;
     background-color: #f0f0f0; /* Light background for the bubble */
     border-radius: 10px;       /* Rounded corners */

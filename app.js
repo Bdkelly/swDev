@@ -49,21 +49,16 @@ app.post('/flight_find', (req, res) => {
         } 
     });
 });
-app.post('/Alive',(req,res) => {
-    const data  = req;
-    console.log("Trying")
-    const pythonProcess = spawn('python', ['flask_app/useap.py']);
-    console.log("Trying")
-    pythonProcess.stdout.on('data', (data) => {
-        try {
-            const parsedData = JSON.parse(data.toString()); // Attempt to parse as JSON first
-            res.json(parsedData); 
-        } catch (error) {
-            // If it's not valid JSON, handle it differently (see method 2)
-            console.log("Data is not in JSON format:", data.toString());  
-        } 
-    });
-});
+app.post('/saveflights.html', (req, res) => {
+    const data  = req.body
+    try {
+        const parsedData = JSON.parse(data.toString()); // Attempt to parse as JSON first
+        res.json(parsedData); 
+    } catch (error) {
+        // If it's not valid JSON, handle it differently (see method 2)
+        console.log("Data is not in JSON format:", data.toString());  
+    } 
+})
 // Start the server
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
