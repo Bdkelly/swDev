@@ -1,8 +1,7 @@
 from AppCall import AppCall
 import sys
 import json
-import requests
-
+##########################################
 def main(depcity,depDate,arrcity,retDate):
     vals = {}
     count = 0
@@ -10,33 +9,33 @@ def main(depcity,depDate,arrcity,retDate):
     info = {"depC":depcity,"arrCity":arrcity,"depDate":depDate,"retDate":retDate}
     data = caller.flightSearch(info)
     for line in data['data']['itineraries']:
-        count =+ 1
+        count = count + 1
         for k,v in line.items():
             if k == "legs":
                 org = v[0]['origin']['city']
                 dest = v[0]['destination']['city']
                 if len(v) == 2:
-                    toLeg = getLegs(v[0],dest)
-                    backLeg = getLegs(v[1],org)
-                    vals[line["id"]] = {"Price":line['price']['formatted'],"Score":line['score'],"flightTo":toLeg,"flightFrom":backLeg}
+                    toLeg,toTime= getLegs(v[0])
+                    backLeg,backTime = getLegs(v[1])
+                    vals[line["id"]] = {"Origin":org,"Destination":dest,"Price":line['price']['formatted'],"Score":line['score'],"toTime":toTime,"flightTo":toLeg,"backTime":backTime,"flightFrom":backLeg}
                 else:
-                    toLeg = getLegs(v[0],dest)
-                    vals[line["id"]] = {"Price":line['price']['formatted'],"Score":line['score'],"flightTo":toLeg}
+                    toLeg,toTime= getLegs(v[0])
+                    vals[line["id"]] = {"Origin":org,"Destination":dest,"Price":line['price']['formatted'],"Score":line['score'],"flightTo":toLeg,"toTime":toTime}
             else:
                 pass
         if count == 11:
-            break
-    return json.dumps(vals)
-def getLegs(data,dest):
+            return json.dumps(vals)
+def getLegs(data):
     legData = {}
     count = 0
+    totalTime = data["durationInMinutes"]
     for i in data['segments']:
         count += 1
         off = i['origin']['parent']['name']
         land = i['destination']['parent']['name']
         legData["Stop{0}".format(count)] = {"start":off,"end":land,"durationInMinutes":i["durationInMinutes"],"carrier":i["operatingCarrier"]['name']}
         #print("{0} -> {1}".format(off,land))
-    return legData
+    return legData,totalTime
 
 def login():
     url = "https://sky-scrapper.p.rapidapi.com/api/v1"
@@ -46,6 +45,7 @@ def login():
     return caller
 
 if __name__ == "__main__": 
+    
     if sys.argv[4] == None:
         retDate = ""
     else:    
@@ -60,6 +60,7 @@ if __name__ == "__main__":
     depDate = lst[2]
     retDate = lst[3]
     '''
+    
     print(main(depcity,depDate,arrcity,retDate))
 
 

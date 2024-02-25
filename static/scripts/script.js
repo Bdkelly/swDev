@@ -35,10 +35,26 @@ function runpython() {
   })
   .catch(error => console.error('Error running Python script:', error));
 };
-function updateDropdown() {
-  fromdrop.innerHTML = "";
-  todrop.innerHTML = ""; 
+let savedFlights = [];
+function saveFlights(){
+  document.addEventListener('change', (event) => {
+    const checkbox = event.target;
+    if (checkbox.type === 'checkbox') {
+      const flightKey = checkbox.value;
+      if (checkbox.checked) {
+        savedFlights.push(flightKey); 
+      } else {
+        // Remove from array if unchecked
+        const index = savedFlights.indexOf(flightKey); 
+        if (index > -1) { 
+          savedFlights.splice(index, 1);
+        }
+      }
+      console.log("Saved Flights:", savedFlights); // To check
+    }
+  });
 }
+
 function getFlights(){
   console.log("Searching Flights")
   if (!responseData) {
@@ -62,7 +78,21 @@ function getFlights(){
 .then(data => {
   flightData = data;
   const flightbox = document.getElementById('flight-box');
+  const firstFlightKey = Object.keys(flightData)[0]; 
+  const firstFlightInfo = flightData[firstFlightKey];
+  header = document.createElement('div');
+  const orgdestElement = document.createElement('h2');
+  orgdestElement.textContent = `Origin: ${firstFlightInfo.Origin} --> Destination: ${firstFlightInfo.Destination}`;
+  header.appendChild(orgdestElement)
+  flightbox.appendChild(header);
   Object.entries(flightData).forEach(([flightKey, flightInfo]) => {
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    const label = document.createElement('label');
+    label.htmlFor = `flight-${flightKey}`;
+    label.textContent = 'Save Flight';
+    checkbox.id = `flight-${flightKey}`; // Assuming you have unique flight identifiers
+    checkbox.value = flightKey;
     const flightDiv = document.createElement('div');
     flightDiv.classList.add('flight-info');
     flightDiv.classList.add('part-bubble');
@@ -71,24 +101,64 @@ function getFlights(){
     priceElement.textContent = `Price: ${flightInfo.Price}`;
     const scoreElement = document.createElement('p');
     scoreElement.textContent = `Score: ${flightInfo.Score}`;
-    const flightToElement = document.createElement('div');
-    for (const stopKey in flightInfo.flightTo) {
-      const stop = flightInfo.flightTo[stopKey];
-  
-      const stopElement = document.createElement('p');
-      stopElement.textContent = `From: ${stop.start} To: ${stop.end} 
-                                 (${stop.durationInMinutes} mins) by ${stop.carrier}`;
-      flightToElement.appendChild(stopElement);
-    }
     //
-    flightDiv.appendChild(flightToElement); 
-    flightDiv.appendChild(priceElement);
-    flightDiv.appendChild(scoreElement);
+    const dep = document.createElement('p');
+    dep.textContent = `Departure`;
+    const flightToElement = document.createElement('div');
+    if("flightFrom" in flightInfo){
+      const retu = document.createElement('p');
+      retu.textContent = `Return`;
+      for (const stopKey in flightInfo.flightTo) {
+        const stop = flightInfo.flightTo[stopKey];
+        const stopElement = document.createElement('p');
+        stopElement.textContent = `From: ${stop.start} To: ${stop.end} (${stop.durationInMinutes} mins) by ${stop.carrier}`;
+        flightToElement.appendChild(stopElement);
+      }
+      const flightfromElement = document.createElement('div');
+      for (const key in flightInfo.flightFrom) {
+        const stop = flightInfo.flightFrom[key];
+        const stopElement = document.createElement('p');
+        stopElement.textContent = `From: ${stop.start} To: ${stop.end} (${stop.durationInMinutes} mins) by ${stop.carrier}`;
+        flightfromElement.appendChild(stopElement);
+      }
+      flightDiv.appendChild(orgdestElement)
+      flightDiv.appendChild(priceElement);
+      flightDiv.appendChild(scoreElement);
+      flightDiv.appendChild(dep);
+      flightDiv.appendChild(flightToElement);
+      flightDiv.appendChild(retu);
+      flightDiv.appendChild(flightfromElement);
+      flightbox.appendChild(flightDiv);
+    }else{
+      const flightToElement = document.createElement('div');
+      for (const stopKey in flightInfo.flightTo) {
+        const stop = flightInfo.flightTo[stopKey];
+        const stopElement = document.createElement('p');
+        stopElement.textContent = `From: ${stop.start} To: ${stop.end} (${stop.durationInMinutes} mins) by ${stop.carrier}`;
+        flightToElement.appendChild(stopElement);
+      }
+      flightDiv.appendChild(priceElement);
+      flightDiv.appendChild(scoreElement);
+      flightDiv.appendChild(dep);
+      flightDiv.appendChild(flightToElement);
+    }
+    flightDiv.appendChild(checkbox);
+    flightDiv.appendChild(label); 
     flightbox.appendChild(flightDiv);
-      
+    // 
   });
 
   }
   )
-.catch(error => console.error('Error running Python script:', error));
+console.log("DONE")
 };
+function clearFlights() {
+  updateDropdown()
+  const flightbox = document.getElementById('flight-box');
+  flightbox.innerHTML = ""; 
+}
+function updateDropdown() {
+  fromdrop.innerHTML = "";
+  todrop.innerHTML = ""; 
+}
+

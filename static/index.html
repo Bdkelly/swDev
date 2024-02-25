@@ -11,6 +11,9 @@
                 <h1>Flight Search App</h1>
             </div>
         </div>
+        <div class="topnav">
+            <a class="aboutButton" href="/saveflights.html">Saved Flights</a>
+        </div>
         <div class="sep">
             <body style="background-color: lightblue;"></body>
         <form id="flightSearchForm">
@@ -62,10 +65,15 @@
                     </div>
                 </span>
             </div>
-            <button type="button" onclick="getFlights()">Search Flights</button>
+            <div class="button-block">
+                <button type="button" onclick="getFlights()">Search Flights</button>
+                <button type="button" onclick="clearFlights()">Clear Flights</button>
+                <button type="button" onclick="saveFlights()">Save Flights</button>
+            </div>
+            
         </div>
         <div id="flight-box">
-
+        
         </div>
     
         <script src="scripts/script.js"></script>

@@ -53,8 +53,33 @@ button {
 #apSelector > div { /* Direct children of flightResults */ 
    margin-bottom: 5px;
 }
+.topnav {
+    display: flex;
+    background-color: #d17c02;
+    overflow: hidden;
+    justify-content: space-around;
+  }
+  .topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    width: 33%;
+    font-family: 'PT Sans Caption', sans-serif;
+  }
+  .homeButton, .aboutButton, .docButton {
+    border: solid #ffac37;
+  }
+  .topnav a:hover {
+    background-color: white;
+    color: black;
+  }
+  
 
 .part-bubble {
+    margin: 15px;
     background-color: #f0f0f0; /* Light background for the bubble */
     border-radius: 10px;       /* Rounded corners */
     padding: 12px 18px;        /* Internal spacing */
@@ -64,6 +89,7 @@ button {
 /* For an arrow-like pointer (optional) */
 .part-bubble::after {
     content: '';
+    margin: 15px;
     position: absolute;
     top: 50%;    /* Adjust as needed for vertical positioning */
     left: -10px;  /* Position it outside the left edge */
