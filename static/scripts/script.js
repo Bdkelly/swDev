@@ -5,9 +5,6 @@ function runpython() {
     console.log("Running")
     const departureCity = document.getElementById('departureCity').value;
     const arrivalCity = document.getElementById('arrivalCity').value;
-    // Create a JSON object with arguments for the Python script
-  
-    // Make an AJAX request to the Flask app endpoint
     fetch('/run_python_script', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -17,7 +14,6 @@ function runpython() {
   .then(data => {
       responseData = data;
       updateDropdown()
-      // Assuming responseData is like: { departureCity: '...', arrivalCity: '...', otherFlightData: ... }
       var fromdrop = document.getElementById('fromdrop');
       for (var key in responseData.from){
         var option = document.createElement("option");
@@ -43,7 +39,7 @@ function saveFlights(){
     checkboxes.forEach(checkbox => {
         if (checkbox.checked) {
             const flightKey = checkbox.value;
-            const flightInfo = flightData[flightKey]; // Assuming flightData is accessible
+            const flightInfo = flightData[flightKey];
             checkedFlights.push(flightInfo);
         }
     });
@@ -62,7 +58,6 @@ function postCheckedFlights(checkedFlights){
 })
 .then(response => response.json())
 .then(data => {
-    // Handle successful response
     flightData = data;
     const flightbox = document.getElementById('flight-box');
     Object.entries(flightData).forEach(([flightKey, flightInfo]) => {
@@ -124,7 +119,7 @@ function getFlights(){
   console.log("Searching Flights")
   if (!responseData) {
     console.error("responseData is not available. Did you call runpython() first?");
-    return; // Exit if no data 
+    return;
   }
   const fromapid = fromdrop.value;
   const toapid = todrop.value;
@@ -150,7 +145,7 @@ function getFlights(){
     const label = document.createElement('label');
     label.htmlFor = `flight-${flightKey}`;
     label.textContent = 'Save Flight';
-    checkbox.id = `flight-${flightKey}`; // Assuming you have unique flight identifiers
+    checkbox.id = `flight-${flightKey}`;
     checkbox.value = flightKey;
     const flightDiv = document.createElement('div');
     flightDiv.classList.add('flight-info');
@@ -180,7 +175,6 @@ function getFlights(){
         stopElement.textContent = `From: ${stop.start} To: ${stop.end} (${stop.durationInMinutes} mins) by ${stop.carrier}`;
         flightfromElement.appendChild(stopElement);
       }
-      flightDiv.appendChild(orgdestElement)
       flightDiv.appendChild(priceElement);
       flightDiv.appendChild(scoreElement);
       flightDiv.appendChild(dep);
