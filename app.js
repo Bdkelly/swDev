@@ -22,10 +22,9 @@ app.post('/run_python_script', (req, res) => {
     
     pythonProcess.stdout.on('data', (data) => {
         try {
-            const parsedData = JSON.parse(data.toString()); // Attempt to parse as JSON first
+            const parsedData = JSON.parse(data.toString());
             res.json(parsedData); 
         } catch (error) {
-            // If it's not valid JSON, handle it differently (see method 2)
             console.log("Data is not in JSON format:", data.toString());  
         } 
     });
@@ -44,7 +43,6 @@ app.post('/flight_find', (req, res) => {
             const parsedData = JSON.parse(data.toString()); // Attempt to parse as JSON first
             res.json(parsedData); 
         } catch (error) {
-            // If it's not valid JSON, handle it differently (see method 2)
             console.log("Data is not in JSON format:", data.toString());  
         } 
     });
@@ -55,7 +53,6 @@ app.post('/saveflights.html', (req, res) => {
         const parsedData = JSON.parse(data.toString()); // Attempt to parse as JSON first
         res.json(parsedData); 
     } catch (error) {
-        // If it's not valid JSON, handle it differently (see method 2)
         console.log("Data is not in JSON format:", data.toString());  
     } 
 })

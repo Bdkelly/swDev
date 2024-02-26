@@ -2,6 +2,7 @@ let responseData;
 let flightData;
 
 function runpython() {
+    //This function get info from webpage to pass to Python to get Airport data for webpage
     console.log("Running")
     const departureCity = document.getElementById('departureCity').value;
     const arrivalCity = document.getElementById('arrivalCity').value;
@@ -33,6 +34,7 @@ function runpython() {
 };
 document.getElementById('saver').addEventListener('click', saveFlights);
 function saveFlights(){
+  //Tried to save flight data function does not work
   const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     const checkedFlights = [];
 
@@ -48,6 +50,7 @@ function saveFlights(){
     postCheckedFlights(checkedFlights)
 }
 function postCheckedFlights(checkedFlights){
+  //Tried to post flight data to savedflight.html page
   const postData = JSON.stringify(checkedFlights);
   fetch('/saveflights.html', {
     method: 'POST',
@@ -116,6 +119,7 @@ function postCheckedFlights(checkedFlights){
     });
 }
 function getFlights(){
+  //Get flight data (Airport, Departure Date, Return Date *optional) and passes it to Python to call API to get all flight information
   console.log("Searching Flights")
   if (!responseData) {
     console.error("responseData is not available. Did you call runpython() first?");
@@ -137,6 +141,7 @@ function getFlights(){
 })
 .then(response => response.json())
 .then(data => {
+  //Creates html items, and posts then to web page
   flightData = data;
   const flightbox = document.getElementById('flight-box');
   createheader(flightData,flightbox);
@@ -207,14 +212,17 @@ function getFlights(){
 console.log("DONE")
 };
 function clearFlights() {
+  //Clears flight info
   const flightbox = document.getElementById('flight-box');
   flightbox.innerHTML = ""; 
 }
 function updateDropdown() {
+  //Clears dropdown information from page
   fromdrop.innerHTML = "";
   todrop.innerHTML = ""; 
 }
 function createheader(flightData,flightbox){
+  //Function to clean up getFlights function, and post Data to webpage
   const firstFlightKey = Object.keys(flightData)[0]; 
   const firstFlightInfo = flightData[firstFlightKey];
   header = document.createElement('div');
